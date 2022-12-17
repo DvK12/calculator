@@ -13,3 +13,7 @@ function divide(a, b) {
   }
   return "Cannot divide by zero";
 }
+
+function operate(f, a, b) {
+  return f(a, b);
+}

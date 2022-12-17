@@ -1,0 +1,12 @@
+body {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+}
+.calculator {
+  padding: 50px;
+  display: flex;
+}
+.keys {
+  display: flex;
+}
