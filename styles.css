@@ -6,7 +6,15 @@ body {
 .calculator {
   padding: 50px;
   display: flex;
+  flex-direction: column;
 }
 .keys {
   display: flex;
+  justify-content: space-between;
+}
+.row > * {
+  padding: 10px;
+}
+.result {
+  padding-bottom: 20px;
 }
