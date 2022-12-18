@@ -23,6 +23,13 @@ function updateResult(e) {
   result.textContent += e.target.innerText;
 }
 
+function clearDisplay() {
+  const result = document.querySelector(".result");
+  result.textContent = "";
+}
+
 const numberKeys = Array.from(document.querySelectorAll(".num"));
+const clearKey = document.getElementById("clear");
+clearKey.addEventListener("click", clearDisplay);
 
 numberKeys.forEach((key) => key.addEventListener("click", updateResult));

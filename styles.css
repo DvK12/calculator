@@ -13,12 +13,16 @@ body {
   display: flex;
   justify-content: space-between;
 }
+
 .row > * {
   padding: 20px;
+  cursor: default;
 }
+
 .result {
   padding: 20px;
   background-color: antiquewhite;
+  text-align: right;
 }
 
 .num {
