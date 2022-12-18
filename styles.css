@@ -2,9 +2,10 @@ body {
   display: flex;
   justify-content: center;
   text-align: center;
+  background-color: black;
 }
 .calculator {
-  padding: 50px;
+  padding: 100px;
   display: flex;
   flex-direction: column;
 }
@@ -13,8 +14,16 @@ body {
   justify-content: space-between;
 }
 .row > * {
-  padding: 10px;
+  padding: 20px;
 }
 .result {
-  padding-bottom: 20px;
+  padding: 20px;
+  background-color: antiquewhite;
+}
+
+.num {
+  background-color: aqua;
+}
+.operator {
+  background-color: aliceblue;
 }
