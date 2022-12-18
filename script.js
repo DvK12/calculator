@@ -1,3 +1,6 @@
+function sleep(ms) {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+}
 function add(a, b) {
   if (a.length === 0 || b.length === 0) {
     return;
@@ -44,6 +47,7 @@ function updateDisplayedResult(e) {
   let displayValue = getDisplayValue() + e.target.innerText;
   updateDisplay(displayValue);
   if (e.target.classList[0] == "operator") {
+    updateDisplay(previousOperationValues[0]);
     clearDisplay();
   }
 }
@@ -55,6 +59,9 @@ function clearDisplay() {
 function saveOperation(e) {
   let previousNumber = getDisplayValue();
   let operator = e.target.dataset.operator;
+  if (previousOperationValues.length > 0) {
+    previousNumber = calculateResult();
+  }
   previousOperationValues[0] = previousNumber;
   previousOperationValues[1] = operator;
 }
