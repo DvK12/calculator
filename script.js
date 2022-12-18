@@ -1,6 +1,5 @@
-function sleep(ms) {
-  return new Promise((resolve) => setTimeout(resolve, ms));
-}
+//add that when an operator is clicked for the second time it acts as the equal sign
+
 function add(a, b) {
   if (a.length === 0 || b.length === 0) {
     return;
@@ -40,15 +39,16 @@ function updateDisplay(displayValue) {
   result.textContent = displayValue;
 }
 function updateDisplayedResult(e) {
-  //to avoid overflowing the window
-  if (getDisplayValue().length == 32) {
-    return;
-  }
-  let displayValue = getDisplayValue() + e.target.innerText;
-  updateDisplay(displayValue);
   if (e.target.classList[0] == "operator") {
     updateDisplay(previousOperationValues[0]);
     clearDisplay();
+  }
+  //to avoid overflowing the window
+  else if (getDisplayValue().length == 32) {
+    return;
+  } else {
+    let displayValue = getDisplayValue() + e.target.innerText;
+    updateDisplay(displayValue);
   }
 }
 
