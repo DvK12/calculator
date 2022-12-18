@@ -17,3 +17,12 @@ function divide(a, b) {
 function operate(f, a, b) {
   return f(a, b);
 }
+
+function updateResult(e) {
+  const result = document.querySelector(".result");
+  result.textContent += e.target.innerText;
+}
+
+const numberKeys = Array.from(document.querySelectorAll(".num"));
+
+numberKeys.forEach((key) => key.addEventListener("click", updateResult));
