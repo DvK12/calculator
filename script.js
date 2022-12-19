@@ -57,7 +57,9 @@ function saveOperation(e) {
   //  previousOperationValues[0] = calculateResult();
   //}
   previousOperationValues[1] = operator;
-  previousOperationValues[2] = previousOperationValues[0];
+  if (previousOperationValues[2] == undefined) {
+    previousOperationValues[2] = previousOperationValues[0];
+  }
   previousOperationValues[0] = "";
   updateDisplayedResult();
 }
@@ -72,7 +74,9 @@ function calculateResult() {
   return value;
 }
 function displayResult() {
-  updateDisplay(calculateResult());
+  let result = calculateResult();
+  updateDisplay(result);
+  previousOperationValues[2] = result;
 }
 function updateSavedNumber(e) {
   previousOperationValues[0] = previousOperationValues[0] + e.target.innerText;
