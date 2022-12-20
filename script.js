@@ -109,6 +109,15 @@ function updateSavedNumber(e) {
   }
 }
 
+function removeLastDigit() {
+  try {
+    previousOperationValues[0] = previousOperationValues[0]
+      .toString()
+      .slice(0, -1);
+  } catch (e) {}
+  updateDisplayedResult();
+}
+
 let previousOperationValues = [""];
 let isPreviousResultDisplayed = false;
 
@@ -116,6 +125,7 @@ const numberKeys = Array.from(document.querySelectorAll(".num"));
 const operatorKeys = Array.from(document.querySelectorAll(".operator"));
 const clearKey = document.getElementById("clear");
 const equalKey = document.getElementById("equal");
+const backspaceKey = document.getElementById("backspace");
 
 numberKeys.forEach((key) => key.addEventListener("click", updateSavedNumber));
 numberKeys.forEach((key) =>
@@ -126,3 +136,8 @@ operatorKeys.forEach((key) => key.addEventListener("click", saveOperation));
 
 clearKey.addEventListener("click", clearDisplay);
 equalKey.addEventListener("click", displayResult);
+backspaceKey.addEventListener("click", removeLastDigit);
+
+//todo
+//-add . functionality
+//-enable keyboard input
