@@ -5,7 +5,8 @@ body {
   background-color: black;
 }
 .calculator {
-  padding: 200px;
+  margin-top: 200px;
+  border: 2px solid rgb(59, 85, 0);
   display: flex;
   flex-direction: column;
 }
@@ -14,22 +15,33 @@ body {
   justify-content: space-between;
 }
 
-.row > * {
+.column {
+  display: flex;
+  flex-direction: column;
+}
+
+.column > * {
   padding: 40px;
   cursor: default;
+  border: 1px solid rgb(0, 195, 255);
+  background-color: aliceblue;
 }
 
 .result {
   padding: 40px;
   background-color: antiquewhite;
   text-align: right;
+  border: 1px solid rgb(59, 85, 0);
 }
 
 .num {
   background-color: aqua;
 }
-.operator,
-#clear,
+
+#division,
 #equal {
-  background-color: aliceblue;
+  flex-grow: 2;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
