@@ -21,13 +21,17 @@ function divide(a, b) {
   if (a.length === 0 || b.length === 0) {
     return;
   } else if (b == 0) {
-    return "Div by 0";
+    return "Division by 0!";
   }
   return parseInt(a) / parseInt(b);
 }
 
 function operate(f, a, b) {
-  return window[f](a, b);
+  try {
+    return window[f](a, b);
+  } catch (e) {
+    return "error";
+  }
 }
 
 function clearDisplay() {
@@ -43,7 +47,7 @@ function updateDisplay(displayValue) {
 
 function updateDisplayedResult() {
   //to avoid overflowing the window
-  if (previousOperationValues[0].length == 32) {
+  if (previousOperationValues[0]?.length == 32) {
     return;
   } else {
     updateDisplay(previousOperationValues[0]);
@@ -86,7 +90,13 @@ function calculateResult() {
 function displayResult() {
   let result = calculateResult();
   updateDisplay(result);
-  previousOperationValues[2] = result;
+  if (result == "error") {
+    clearDisplay();
+    alert("there was an error, please try again");
+  } else {
+    previousOperationValues[2] = result;
+  }
+
   isPreviousResultDisplayed = true;
 }
 function updateSavedNumber(e) {
@@ -116,5 +126,3 @@ operatorKeys.forEach((key) => key.addEventListener("click", saveOperation));
 
 clearKey.addEventListener("click", clearDisplay);
 equalKey.addEventListener("click", displayResult);
-
-// result of previous operation should be displayed (start with 0 or "") until a new number is clicked after an operation.
