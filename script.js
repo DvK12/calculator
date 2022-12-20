@@ -33,6 +33,7 @@ function operate(f, a, b) {
 function clearDisplay() {
   updateDisplay("");
   previousOperationValues = [""];
+  isPreviousResultDisplayed = false;
 }
 
 function updateDisplay(displayValue) {
@@ -51,21 +52,25 @@ function updateDisplayedResult() {
 
 function saveOperation(e) {
   //previousOperationValues contains first the displayed number, second the operation and third the carried result
-
   if (previousOperationValues[2] == undefined) {
     previousOperationValues[2] = previousOperationValues[0];
   } else {
-    console.log(previousOperationValues);
-    previousOperationValues[2] = operate(
-      previousOperationValues[1],
-      previousOperationValues[2],
-      previousOperationValues[0]
-    );
-    console.log(previousOperationValues);
+    if (previousOperationValues[1] != undefined) {
+      previousOperationValues[2] = operate(
+        previousOperationValues[1],
+        previousOperationValues[2],
+        previousOperationValues[0]
+      );
+      isPreviousResultDisplayed = true;
+    }
   }
   let operator = e.target.dataset.operator;
   previousOperationValues[1] = operator;
-  previousOperationValues[0] = "";
+  if (isPreviousResultDisplayed) {
+    previousOperationValues[0] = previousOperationValues[2];
+  } else {
+    previousOperationValues[0] = "";
+  }
   updateDisplayedResult();
 }
 
@@ -82,12 +87,20 @@ function displayResult() {
   let result = calculateResult();
   updateDisplay(result);
   previousOperationValues[2] = result;
+  isPreviousResultDisplayed = true;
 }
 function updateSavedNumber(e) {
-  previousOperationValues[0] = previousOperationValues[0] + e.target.innerText;
+  if (isPreviousResultDisplayed) {
+    isPreviousResultDisplayed = false;
+    previousOperationValues[0] = e.target.innerText;
+  } else {
+    previousOperationValues[0] =
+      previousOperationValues[0] + e.target.innerText;
+  }
 }
 
 let previousOperationValues = [""];
+let isPreviousResultDisplayed = false;
 
 const numberKeys = Array.from(document.querySelectorAll(".num"));
 const operatorKeys = Array.from(document.querySelectorAll(".operator"));
