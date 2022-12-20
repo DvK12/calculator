@@ -52,14 +52,19 @@ function updateDisplayedResult() {
 function saveOperation(e) {
   //previousOperationValues contains first the displayed number, second the operation and third the carried result
 
-  let operator = e.target.dataset.operator;
-  //if (previousOperationValues.length > 1) {
-  //  previousOperationValues[0] = calculateResult();
-  //}
-  previousOperationValues[1] = operator;
   if (previousOperationValues[2] == undefined) {
     previousOperationValues[2] = previousOperationValues[0];
+  } else {
+    console.log(previousOperationValues);
+    previousOperationValues[2] = operate(
+      previousOperationValues[1],
+      previousOperationValues[2],
+      previousOperationValues[0]
+    );
+    console.log(previousOperationValues);
   }
+  let operator = e.target.dataset.operator;
+  previousOperationValues[1] = operator;
   previousOperationValues[0] = "";
   updateDisplayedResult();
 }
