@@ -47,7 +47,7 @@ function updateDisplay(displayValue) {
 
 function updateDisplayedResult() {
   //to avoid overflowing the window
-  if (previousOperationValues[0]?.length == 32) {
+  if (previousOperationValues[0].length == 32) {
     return;
   } else {
     updateDisplay(previousOperationValues[0]);
@@ -94,7 +94,7 @@ function displayResult() {
     clearDisplay();
     alert("there was an error, please try again");
   } else {
-    previousOperationValues[2] = result;
+    previousOperationValues = [];
   }
 
   isPreviousResultDisplayed = true;
