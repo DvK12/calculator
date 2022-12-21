@@ -20,6 +20,7 @@ clearKey.addEventListener("click", clearDisplay);
 equalKey.addEventListener("click", displayResult);
 backspaceKey.addEventListener("click", removeLastDigit);
 dotKey.addEventListener("click", addDot);
+document.addEventListener("keypress", handleKeyboardInput);
 
 function add(a, b) {
   if (a.length === 0 || b.length === 0) {
@@ -148,6 +149,57 @@ function addDot() {
     updateDisplayedResult();
   }
 }
+
+function handleKeyboardInput(e) {
+  if (e.key == ".") {
+    addDot();
+  } else if (e.key == "Enter") {
+    displayResult();
+  } else if (e.key == "/") {
+    let operationObject = {
+      target: {
+        dataset: {
+          operator: "divide",
+        },
+      },
+    };
+    saveOperation(operationObject);
+  } else if (e.key == "+") {
+    let operationObject = {
+      target: {
+        dataset: {
+          operator: "add",
+        },
+      },
+    };
+    saveOperation(operationObject);
+  } else if (e.key == "-") {
+    let operationObject = {
+      target: {
+        dataset: {
+          operator: "subtract",
+        },
+      },
+    };
+    saveOperation(operationObject);
+  } else if (e.key == "*") {
+    let operationObject = {
+      target: {
+        dataset: {
+          operator: "multiply",
+        },
+      },
+    };
+    saveOperation(operationObject);
+  } else if (!isNaN(e.key)) {
+    updateSavedNumber({
+      target: {
+        innerText: e.key,
+      },
+    });
+    updateDisplayedResult();
+  }
+}
 //todo
-//-add . functionality
+
 //-enable keyboard input
