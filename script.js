@@ -1,21 +1,43 @@
 //add that when an operator is clicked for the second time it acts as the equal sign
+let previousOperationValues = [""];
+let isPreviousResultDisplayed = false;
+
+const numberKeys = Array.from(document.querySelectorAll(".num"));
+const operatorKeys = Array.from(document.querySelectorAll(".operator"));
+const clearKey = document.getElementById("clear");
+const equalKey = document.getElementById("equal");
+const backspaceKey = document.getElementById("backspace");
+const dotKey = document.getElementById("dot");
+
+numberKeys.forEach((key) => key.addEventListener("click", updateSavedNumber));
+numberKeys.forEach((key) =>
+  key.addEventListener("click", updateDisplayedResult)
+);
+
+operatorKeys.forEach((key) => key.addEventListener("click", saveOperation));
+
+clearKey.addEventListener("click", clearDisplay);
+equalKey.addEventListener("click", displayResult);
+backspaceKey.addEventListener("click", removeLastDigit);
+dotKey.addEventListener("click", addDot);
+
 function add(a, b) {
   if (a.length === 0 || b.length === 0) {
     return;
   }
-  return parseInt(a) + parseInt(b);
+  return parseFloat(a) + parseFloat(b);
 }
 function subtract(a, b) {
   if (a.length === 0 || b.length === 0) {
     return;
   }
-  return parseInt(a) - parseInt(b);
+  return a - b;
 }
 function multiply(a, b) {
   if (a.length === 0 || b.length === 0) {
     return;
   }
-  return parseInt(a) * parseInt(b);
+  return a * b;
 }
 function divide(a, b) {
   if (a.length === 0 || b.length === 0) {
@@ -23,7 +45,7 @@ function divide(a, b) {
   } else if (b == 0) {
     return "Division by 0!";
   }
-  return parseInt(a) / parseInt(b);
+  return a / b;
 }
 
 function operate(f, a, b) {
@@ -94,9 +116,8 @@ function displayResult() {
     clearDisplay();
     alert("there was an error, please try again");
   } else {
-    previousOperationValues = [];
+    previousOperationValues[2] = result;
   }
-
   isPreviousResultDisplayed = true;
 }
 function updateSavedNumber(e) {
@@ -118,26 +139,15 @@ function removeLastDigit() {
   updateDisplayedResult();
 }
 
-let previousOperationValues = [""];
-let isPreviousResultDisplayed = false;
-
-const numberKeys = Array.from(document.querySelectorAll(".num"));
-const operatorKeys = Array.from(document.querySelectorAll(".operator"));
-const clearKey = document.getElementById("clear");
-const equalKey = document.getElementById("equal");
-const backspaceKey = document.getElementById("backspace");
-
-numberKeys.forEach((key) => key.addEventListener("click", updateSavedNumber));
-numberKeys.forEach((key) =>
-  key.addEventListener("click", updateDisplayedResult)
-);
-
-operatorKeys.forEach((key) => key.addEventListener("click", saveOperation));
-
-clearKey.addEventListener("click", clearDisplay);
-equalKey.addEventListener("click", displayResult);
-backspaceKey.addEventListener("click", removeLastDigit);
-
+function shouldDotBeAdded() {
+  return !previousOperationValues[0].includes(".");
+}
+function addDot() {
+  if (shouldDotBeAdded()) {
+    previousOperationValues[0] += ".";
+    updateDisplayedResult();
+  }
+}
 //todo
 //-add . functionality
 //-enable keyboard input
